@@ -3,11 +3,13 @@
 pip install djangorestframework_simplejwt
 - Setting for JWT
 # settings.py
+```
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
 }
+```
 # urls.py
 from django.urls import path
 from rest_framework_simplejwt import views as jwt_views
