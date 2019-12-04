@@ -22,9 +22,10 @@ urlpatterns = [
 ]
 ```
 2. Enable PostgreSQL
-
+```
 - install psycopg2
 pip install psycopg2
+```
 - set username / password on pgadmin4
 ../settings.py
 replace into postgresql settings
