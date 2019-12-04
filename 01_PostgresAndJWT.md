@@ -1,6 +1,8 @@
 1. Enable JWT
 - install package for JWT authentication
+```
 pip install djangorestframework_simplejwt
+```
 - Setting for JWT
 # settings.py
 ```
@@ -28,7 +30,7 @@ urlpatterns = [
 pip install psycopg2
 ```
 - set username / password on pgadmin4
-../settings.py
+# settings.py
 replace into postgresql settings
 ```
 # Database
