@@ -30,7 +30,7 @@ pip install psycopg2
 - set username / password on pgadmin4
 ../settings.py
 replace into postgresql settings
-...
+```
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
@@ -44,4 +44,4 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-...
+```
