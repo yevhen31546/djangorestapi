@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Django API Test</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<div style="margin: auto;width: 60%;">
+	<div class="alert alert-success alert-dismissible" id="success" style="display:none;">
+	  <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+	</div>
+	<div class="alert alert-danger alert-dismissible" id="error" style="display:none;">
+	  <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+	</div>
+
+	<form id="login_form" name="form1" method="post">
+
+		<div class="form-group">
+			<label for="pwd">Email:</label>
+			<input type="email" class="form-control" id="email_log" placeholder="Email" name="email">
+		</div>
+		<div class="form-group">
+			<label for="pwd">Password:</label>
+			<input type="password" class="form-control" id="password_log" placeholder="Password" name="password">
+		</div>
+		<input type="button" name="save" class="btn btn-primary" value="Login" id="butlogin">
+
+	</form>
+</div>
+
+<script>
+$(document).ready(function() {
+
+	$('#butlogin').on('click', function() {
+	    console.log("here is login")
+		var email = $('#email_log').val();
+		var password = $('#password_log').val();
+		if(email!="" && password!="" ){
+			$.ajax({
+                xhrFields: {
+                    withCredentials: true
+                },
+				url: "http://localhost:8000/api/token/",
+				type: "POST",
+				data: {
+					username: email,
+					password: password
+				},
+				cache: false,
+				success: function(response){
+                    console.log(response);
+                    if(response.access) {
+                        localStorage.setItem('token', response.access);
+                        location.href = "welcome.html";
+                    }
+				},
+				error: function(httpObj, textStatus) {
+				    console.log(httpObj.status);
+                    if(httpObj.status==200){
+                        $("#success").show();
+						$('#success').html('Registration successful !');
+					}
+                    else {
+                        $("#error").show();
+						$('#error').html('Invalid Username or Password !');
+					}
+                }
+			});
+		}
+		else{
+			alert('Please fill all the field !');
+		}
+	});
+});
+</script>
+</body>
+</html>

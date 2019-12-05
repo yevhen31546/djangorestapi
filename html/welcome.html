@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Django API Test</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<div style="margin: auto;width: 60%;">
+	<h1>Welcome to main page</h1>
+	<button type="button" class="btn btn-success btn-sm" id="logout">Logout</button>
+    <input type="button" name="testping" class="btn btn-primary" value="Test Ping" id="testping">
+    <div class="alert alert-success alert-dismissible" id="success" style="display:none;">
+	  <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+	</div>
+    <div class="alert alert-danger alert-dismissible" id="error" style="display:none;">
+	  <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+	</div>
+</div>
+
+<script>
+$(document).ready(function() {
+
+    if(!localStorage.getItem('token')) {
+        location.href = "index.html";
+    }
+
+	$('#logout').on('click', function() {
+	    console.log("here is logout")
+	    localStorage.removeItem("token");
+		location.href = "index.html";
+	});
+
+	$('#testping').on('click', function() {
+        $.ajax({
+            xhrFields: {
+                withCredentials: true
+            },
+            url: "http://localhost:8000/api/ping/",
+            type: "GET",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader ("Authorization", "Bearer " + localStorage.getItem('token'));
+            },
+            cache: false,
+            success: function(response){
+                console.log(response);
+                if(response.message) {
+                    $("#success").show();
+                    $('#success').html("Ping Success!!! " + response.message);
+                }
+            },
+            error: function(httpObj, textStatus) {
+                console.log(httpObj.status);
+                if(httpObj.status==200){
+                    $("#success").show();
+                    $('#success').html(response.message);
+                }
+                else {
+                    $("#error").show();
+                    $('#error').html('Ping Error');
+                }
+            }
+        });
+    });
+});
+</script>
+</body>
+</html>
