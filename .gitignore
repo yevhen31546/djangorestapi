@@ -1,0 +1,18 @@
+djangoapi/venv/
+.idea/
+# If you are using PyCharm #
+djangoapi/.idea/**/workspace.xml
+djangoapi/.idea/**/tasks.xml
+djangoapi/.idea/dictionaries
+djangoapi/.idea/**/dataSources/
+djangoapi/.idea/**/dataSources.ids
+djangoapi/.idea/**/dataSources.xml
+djangoapi/.idea/**/dataSources.local.xml
+djangoapi/.idea/**/sqlDataSources.xml
+djangoapi/.idea/**/dynamic.xml
+djangoapi/.idea/**/uiDesigner.xml
+djangoapi/.idea/**/gradle.xml
+djangoapi/.idea/**/libraries
+djangoapi/*.iws /out/
+
+djangoapi/__pycache__/
